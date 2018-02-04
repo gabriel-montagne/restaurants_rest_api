@@ -6,8 +6,8 @@ class RestaurantItem(models.Model):
     """This is the restaurant model."""
 
     name = models.CharField(max_length=255, unique=True)
-    opens_at = models.DateTimeField(auto_now_add=True)
-    closes_at = models.DateTimeField(auto_now_add=True)
+    opens_at = models.DateTimeField(blank=True)
+    closes_at = models.DateTimeField(blank=True)
 
     REQUIRED_FIELDS = ['name']
 

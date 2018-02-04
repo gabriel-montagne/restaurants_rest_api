@@ -19,6 +19,10 @@ The restaurants object has the following fields:
 - opens_at: datetime
 - closes_at: datetime
 
+Permissions(assumption):
+  - authenticated users can: read, create, update and delete records
+  - not authenticated users can: read and create records
+
 Steps to use the repository:
 - make sure you have django, djangoframework, git, vagrant and virtualbox installed:
   - to install django and djangoframework follow the instructions at  http://www.django-rest-framework.org/tutorial/quickstart/
@@ -42,13 +46,49 @@ $> vagrant up
 ```Shell
 $> vagrant ssh
 ```
+- change the directory:
+```Shell
+$> cd /vagrant/src/restaurants_project
+```
+- create the environment (only on first run):
+```Shell
+$> mkvirtualenv restaurants_api
+```
 - load the environment:
 ```Shell
 $> workon restaurants_api
 ```
+- change the directory:
+```Shell
+$> cd ../../
+```
+- install the dependencies:
+```Shell
+$> pip install -r requirements.txt
+```
+- check the installed dependencies:
+```Shell
+$> pip freeze
+Django==1.11
+djangorestframework==3.6.2
+packaging==16.8
+pbr==3.1.1
+psycopg2==2.7.3.2
+pyparsing==2.2.0
+pytz==2017.3
+six==1.10.0
+stevedore==1.28.0
+virtualenv==15.1.0
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.8.2
+```
 - create a superuser:
 ```Shell
-$> python manage.py createsuperuser
+$> python src/restaurants_project/manage.py createsuperuser
+```
+- change the directory:
+```Shell
+$> cd src/restaurants_project
 ```
 - to run the tests type:
 ```Shell
@@ -62,3 +102,18 @@ $> python manage.py runserver 0.0.0.0:8080
 - login using your superuser credentials
 - after login navigate to: 127.0.0.1:8080/api/restaurant to see the list and(or) add a new restaurant
 - to update/delete a specific item, navigate to 127.0.0.1:8080/api/restaurant/{id}
+
+To start Docker run the following commands:
+  ```Shell
+  $> docker-compose run web python src/restaurants_project/manage.py makemigrations
+
+  $> docker-compose run web python src/restaurants_project/manage.py migrate
+
+  $> docker-compose build
+
+  $> docker-compose up
+  ```
+
+  Then open the browser and navigate to 127.0.0.1:8000/admin/login
+
+TODO: Containerize persistence layer

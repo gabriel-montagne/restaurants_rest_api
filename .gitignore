@@ -50,6 +50,9 @@ coverage.xml
 *.mo
 *.pot
 
+# Vagrant stuff
+/.vagrant
+
 # Django stuff:
 *.log
 .static_storage/

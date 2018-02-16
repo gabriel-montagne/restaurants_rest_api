@@ -103,17 +103,17 @@ $> python manage.py runserver 0.0.0.0:8080
 - after login navigate to: 127.0.0.1:8080/api/restaurant to see the list and(or) add a new restaurant
 - to update/delete a specific item, navigate to 127.0.0.1:8080/api/restaurant/{id}
 
-To start Docker run the following commands:
-  ```Shell
-  $> docker-compose run web python src/restaurants_project/manage.py makemigrations
 
-  $> docker-compose run web python src/restaurants_project/manage.py migrate
-
-  $> docker-compose build
-
-  $> docker-compose up
-  ```
+## Docker
+to run the app in docker with PostreSQL persistance layer run:
+```
+> docker-compose up
+```
 
   Then open the browser and navigate to 127.0.0.1:8000/admin/login
 
-TODO: Containerize persistence layer
+authenticate with:
+```
+user = admin
+password= asdf1234
+```

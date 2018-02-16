@@ -96,12 +96,28 @@ WSGI_APPLICATION = 'restaurants_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+PERSISTANCE_LAYER = True
+
+if PERSISTANCE_LAYER:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'restaurants',
+            'USER': 'admin',
+            'PASSWORD': 'admin1234',
+            'HOST': 'db',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    print(os.environ.get('DJANGO_SQLITE_FILENAME'))
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
